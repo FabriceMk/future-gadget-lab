@@ -37,8 +37,8 @@ namespace FutureGadgetLab.Web
             var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
             if (regionName != null)
             {
-                hostBuilder.UseAzureAppServices();
-                hostBuilder.UseApplicationInsights();
+                // hostBuilder.UseAzureAppServices();
+                // hostBuilder.UseApplicationInsights();
             }
 
             return hostBuilder.Build();
