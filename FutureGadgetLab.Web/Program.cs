@@ -33,13 +33,14 @@ namespace FutureGadgetLab.Web
                 .CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
-            // Enable Application Insights and Azure Appservices only when deployed
+            // Enable Azure Appservices only when deployed
             var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
             if (regionName != null)
             {
                 // hostBuilder.UseAzureAppServices();
-                // hostBuilder.UseApplicationInsights();
             }
+
+            hostBuilder.UseApplicationInsights();
 
             return hostBuilder.Build();
         }

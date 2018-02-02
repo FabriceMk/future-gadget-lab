@@ -43,12 +43,6 @@ namespace FutureGadgetLab.Web
             // Add framework services.
             services.AddMvc();
 
-            // Enforce HTTPS.
-            // services.Configure<MvcOptions>(options =>
-            // {
-            //     options.Filters.Add(new RequireHttpsAttribute());
-            // });
-
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -66,11 +60,6 @@ namespace FutureGadgetLab.Web
         /// </summary>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Configure URL Rewriter
-            // var options = new RewriteOptions()
-            //     .AddRedirectToHttps();
-            // app.UseRewriter(options);
-
             // Enable static files serving
             app.UseStaticFiles();
 
