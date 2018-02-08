@@ -50,7 +50,7 @@ namespace FutureGadgetLab.Web
 
                 // Set the comments path for the Swagger JSON and UI.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml"); 
+                var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml");
                 c.IncludeXmlComments(xmlPath);
             });
         }
@@ -71,7 +71,7 @@ namespace FutureGadgetLab.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Future Gadget Lab v1");
             });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

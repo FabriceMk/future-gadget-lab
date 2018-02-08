@@ -34,7 +34,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         public IActionResult Get(string id)
         {
             string result = string.Empty;
-            
+
             switch(id)
             {
                 case "sushi":
