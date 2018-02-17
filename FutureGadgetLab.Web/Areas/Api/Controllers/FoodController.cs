@@ -7,7 +7,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
     /// Controller for Food as a Service (FaaS)
     /// </summary>
     [Area("api")]
-    [Route("api/[controller]")]
+    [Route("api/food")]
     public class FoodController : Controller
     {
         /// <summary>

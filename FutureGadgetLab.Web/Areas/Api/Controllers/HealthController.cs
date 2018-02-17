@@ -7,7 +7,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
     /// Controller for heartbeat checks.
     /// </summary>
     [Area("api")]
-    [Route("api/[controller]")]
+    [Route("api/health")]
     public class HealthController : Controller
     {
         /// <summary>
