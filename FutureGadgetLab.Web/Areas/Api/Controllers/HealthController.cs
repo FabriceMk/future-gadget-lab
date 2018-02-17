@@ -14,7 +14,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         /// Heartbeat endpoint.
         /// </summary>
         /// <returns>An HTTP result.</returns>
-        /// <response code="200">Returns the ordered food item.</response>
+        /// <response code="200">Returns a standard HTTP 200 result.</response>
         [HttpGet]
         public IActionResult Check()
         {
