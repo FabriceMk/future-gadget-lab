@@ -28,7 +28,9 @@ namespace FutureGadgetLab.Web
         /// Creates the host for the web application.
         /// </summary>
         /// <param name="args">Application arguments.</param>
-        public static IWebHost BuildWebHost(string[] args) {
+        /// <returns>A web host.</returns>
+        public static IWebHost BuildWebHost(string[] args)
+        {
             var hostBuilder = WebHost
                 .CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

@@ -35,7 +35,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         {
             string result = string.Empty;
 
-            switch(id)
+            switch (id)
             {
                 case "sushi":
                     result = "🍣🍣🍣🍣🍣🍣"; break;

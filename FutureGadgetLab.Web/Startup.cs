@@ -21,12 +21,14 @@ namespace FutureGadgetLab.Web
     public class Startup
     {
         /// <summary>
-        /// Constructor allowing injection of the Configuration.
+        /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
         /// <summary>
         /// Gets the Configuration.
         /// </summary>
@@ -58,6 +60,8 @@ namespace FutureGadgetLab.Web
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
+        /// <param name="app">The web application.</param>
+        /// <param name="env">The hosting environment.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Enable static files serving
