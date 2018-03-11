@@ -21,12 +21,14 @@ namespace FutureGadgetLab.Web
     public class Startup
     {
         /// <summary>
-        /// Constructor allowing injection of the Configuration.
+        /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
         /// <summary>
         /// Gets the Configuration.
         /// </summary>
@@ -43,12 +45,6 @@ namespace FutureGadgetLab.Web
             // Add framework services.
             services.AddMvc();
 
-            // Enforce HTTPS.
-            // services.Configure<MvcOptions>(options =>
-            // {
-            //     options.Filters.Add(new RequireHttpsAttribute());
-            // });
-
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -56,7 +52,7 @@ namespace FutureGadgetLab.Web
 
                 // Set the comments path for the Swagger JSON and UI.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml"); 
+                var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml");
                 c.IncludeXmlComments(xmlPath);
             });
         }
@@ -64,13 +60,10 @@ namespace FutureGadgetLab.Web
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
+        /// <param name="app">The web application.</param>
+        /// <param name="env">The hosting environment.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Configure URL Rewriter
-            // var options = new RewriteOptions()
-            //     .AddRedirectToHttps();
-            // app.UseRewriter(options);
-
             // Enable static files serving
             app.UseStaticFiles();
 
@@ -82,7 +75,7 @@ namespace FutureGadgetLab.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Future Gadget Lab v1");
             });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

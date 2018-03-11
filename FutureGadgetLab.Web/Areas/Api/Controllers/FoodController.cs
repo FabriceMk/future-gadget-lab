@@ -7,7 +7,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
     /// Controller for Food as a Service (FaaS)
     /// </summary>
     [Area("api")]
-    [Route("api/[controller]")]
+    [Route("api/food")]
     public class FoodController : Controller
     {
         /// <summary>
@@ -34,8 +34,8 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         public IActionResult Get(string id)
         {
             string result = string.Empty;
-            
-            switch(id)
+
+            switch (id)
             {
                 case "sushi":
                     result = "🍣🍣🍣🍣🍣🍣"; break;

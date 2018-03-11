@@ -28,18 +28,21 @@ namespace FutureGadgetLab.Web
         /// Creates the host for the web application.
         /// </summary>
         /// <param name="args">Application arguments.</param>
-        public static IWebHost BuildWebHost(string[] args) {
+        /// <returns>A web host.</returns>
+        public static IWebHost BuildWebHost(string[] args)
+        {
             var hostBuilder = WebHost
                 .CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
-            // Enable Application Insights and Azure Appservices only when deployed
+            // Enable Azure Appservices Integration for logging only when deployed on Azure
             var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
             if (regionName != null)
             {
-                // hostBuilder.UseAzureAppServices();
-                // hostBuilder.UseApplicationInsights();
+                hostBuilder.UseAzureAppServices();
             }
+
+            hostBuilder.UseApplicationInsights();
 
             return hostBuilder.Build();
         }
