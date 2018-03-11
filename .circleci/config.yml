@@ -9,4 +9,5 @@ jobs:
     steps:
       - checkout
       - run: dotnet restore
+      - run: dotnet test ./FutureGadgetLab.Web.Tests
       - run: dotnet build
