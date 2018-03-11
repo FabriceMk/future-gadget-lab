@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGadgetLab.Web", "FutureGadgetLab.Web\FutureGadgetLab.Web.csproj", "{2DF7017C-7BC5-4ACF-BDAA-7428AE36F1EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGadgetLab.Web.Tests", "FutureGadgetLab.Web.Tests\FutureGadgetLab.Web.Tests.csproj", "{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{2DF7017C-7BC5-4ACF-BDAA-7428AE36F1EA}.Release|x64.Build.0 = Release|x64
 		{2DF7017C-7BC5-4ACF-BDAA-7428AE36F1EA}.Release|x86.ActiveCfg = Release|x86
 		{2DF7017C-7BC5-4ACF-BDAA-7428AE36F1EA}.Release|x86.Build.0 = Release|x86
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|x64.ActiveCfg = Debug|x64
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|x64.Build.0 = Debug|x64
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|x86.ActiveCfg = Debug|x86
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Debug|x86.Build.0 = Debug|x86
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|x64.ActiveCfg = Release|x64
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|x64.Build.0 = Release|x64
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|x86.ActiveCfg = Release|x86
+		{50744F50-84A8-4D87-AFB5-CAE26D2A0A74}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal
