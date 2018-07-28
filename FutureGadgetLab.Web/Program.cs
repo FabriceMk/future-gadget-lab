@@ -21,7 +21,7 @@ namespace FutureGadgetLab.Web
         /// <param name="args">Application arguments.</param>
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace FutureGadgetLab.Web
         /// </summary>
         /// <param name="args">Application arguments.</param>
         /// <returns>A web host.</returns>
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             var hostBuilder = WebHost
                 .CreateDefaultBuilder(args)
@@ -42,9 +42,10 @@ namespace FutureGadgetLab.Web
                 hostBuilder.UseAzureAppServices();
             }
 
+            // Enable Azure Application Insights
             hostBuilder.UseApplicationInsights();
 
-            return hostBuilder.Build();
+            return hostBuilder;
         }
     }
 }
