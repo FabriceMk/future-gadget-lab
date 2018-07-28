@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FutureGadgetLab.Web.Areas.Api.Controllers
 {
     /// <summary>
-    /// Controller for Food as a Service (FaaS)
+    /// Controller for Food as a Service (FaaS).
     /// </summary>
     [Area("api")]
     [Route("api/food")]

@@ -37,9 +37,9 @@ namespace FutureGadgetLab.Web
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
-        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940.
         /// </summary>
-        /// <param name="services">Services collection</param>
+        /// <param name="services">Services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
