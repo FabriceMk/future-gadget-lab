@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -37,13 +36,21 @@ namespace FutureGadgetLab.Web
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
-        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940.
         /// </summary>
-        /// <param name="services">Services collection</param>
+        /// <param name="services">Services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -80,6 +87,17 @@ namespace FutureGadgetLab.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                // Enforce HSTS in PRD
+                app.UseHsts();
+            }
+
+            // Forces HTTPS redirection
+            app.UseHttpsRedirection();
+
+            // Set cookie policy with support for GDPR
+            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

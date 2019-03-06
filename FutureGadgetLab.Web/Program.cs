@@ -21,7 +21,7 @@ namespace FutureGadgetLab.Web
         /// <param name="args">Application arguments.</param>
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         /// <summary>
@@ -29,11 +29,14 @@ namespace FutureGadgetLab.Web
         /// </summary>
         /// <param name="args">Application arguments.</param>
         /// <returns>A web host.</returns>
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            var hostBuilder = WebHost
-                .CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            var hostBuilder = WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .ConfigureKestrel((context, options) =>
+                {
+                    // Set properties and call methods on options
+                });
 
             // Enable Azure Appservices Integration for logging only when deployed on Azure
             var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
@@ -42,9 +45,10 @@ namespace FutureGadgetLab.Web
                 hostBuilder.UseAzureAppServices();
             }
 
+            // Enable Azure Application Insights
             hostBuilder.UseApplicationInsights();
 
-            return hostBuilder.Build();
+            return hostBuilder;
         }
     }
 }
