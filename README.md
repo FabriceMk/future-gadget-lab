@@ -9,4 +9,4 @@ It's written with [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/),
 
 ## Tools used
 
-* [Visual Studio Code](https://code.visualstudio.com/): An awesome code editor with a good balance between a simple text editor and an IDE.
+* [Visual Studio Code](https://code.visualstudio.com/): An awesome code editor with a good balance between a text editor and an IDE.
