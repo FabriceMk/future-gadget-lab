@@ -7,7 +7,7 @@ It's written with [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/),
 .NET Core is the modular, open-source and high performance implementation of .NET for creating web applications and services that run on Windows, Linux and Mac and using the C# language.
 
 
-[![CircleCI](https://circleci.com/gh/FabriceMk/future-gadget-lab.svg?style=svg)](https://circleci.com/gh/FabriceMk/future-gadget-lab)
+[![CircleCI](https://circleci.com/gh/FabriceMk/future-gadget-lab.svg?style=svg)](https://circleci.com/gh/FabriceMk/future-gadget-lab) [![Build Status](https://dev.azure.com/fabricemk2/future-gadget-lab/_apis/build/status/FabriceMk.future-gadget-lab?branchName=master)](https://dev.azure.com/fabricemk2/future-gadget-lab/_build/latest?definitionId=1&branchName=master)
 
 ## Tools used
 
