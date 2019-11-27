@@ -23,4 +23,24 @@ resource "azurerm_app_service" "future-gadget-lab-wa" {
   location            = "${azurerm_resource_group.future-gadget-lab-rg.location}"
   resource_group_name = "${azurerm_resource_group.future-gadget-lab-rg.name}"
   app_service_plan_id = "${var.shared-app-service-plan-id}"
+
+  client_affinity_enabled = false
+  https_only = true
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  site_config {
+    always_on = true
+    ftps_state = "Disabled"
+
+    cors {
+      allowed_origins = ["*"]
+    }
+  }
+
+  app_settings = {
+    "WEBSITE_NODE_DEFAULT_VERSION" = "8.9.4"
+  }
 }
