@@ -18,6 +18,8 @@ resource "azurerm_resource_group" "future-gadget-lab-rg" {
   location = "${var.region}"
 }
 
+# TODO: Add Storage
+
 resource "azurerm_app_service" "future-gadget-lab-wa" {
   name = "future-gadget-lab-wa"
   location            = "${azurerm_resource_group.future-gadget-lab-rg.location}"
@@ -44,3 +46,9 @@ resource "azurerm_app_service" "future-gadget-lab-wa" {
     "WEBSITE_NODE_DEFAULT_VERSION" = "8.9.4"
   }
 }
+
+# TODO:: Configure Alerts
+
+# TODO: Add App Insights
+
+# TODO: Add KeyVault
