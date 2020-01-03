@@ -20,6 +20,13 @@ resource "azurerm_resource_group" "future-gadget-lab-rg" {
 
 # TODO: Add Storage
 
+resource "azurerm_application_insights" "future-gadget-lab-ai" {
+  name                = "future-gadget-lab-ai"
+  location            = "${azurerm_resource_group.future-gadget-lab-rg.location}"
+  resource_group_name = "${azurerm_resource_group.future-gadget-lab-rg.name}"
+  application_type    = "Web"
+}
+
 resource "azurerm_app_service" "future-gadget-lab-wa" {
   name = "future-gadget-lab-wa"
   location            = "${azurerm_resource_group.future-gadget-lab-rg.location}"
@@ -43,12 +50,17 @@ resource "azurerm_app_service" "future-gadget-lab-wa" {
   }
 
   app_settings = {
-    "WEBSITE_NODE_DEFAULT_VERSION" = "8.9.4"
+    "WEBSITE_NODE_DEFAULT_VERSION" = "8.9.4",
+
+    # Azure App Insights Integration https://docs.microsoft.com/en-us/azure/azure-monitor/app/azure-web-apps?tabs=netcore
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.future-gadget-lab-ai.instrumentation_key}",
+    "ApplicationInsightsAgent_EXTENSION_VERSION" = "~2",
+    "XDT_MicrosoftApplicationInsights_Mode" = "recommended",
+    "InstrumentationEngine_EXTENSION_VERSION" = "~1",
+    "XDT_MicrosoftApplicationInsights_BaseExtensions" = "~1"
   }
 }
 
 # TODO:: Configure Alerts
-
-# TODO: Add App Insights
 
 # TODO: Add KeyVault
