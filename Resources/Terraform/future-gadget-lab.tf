@@ -27,6 +27,34 @@ resource "azurerm_application_insights" "future-gadget-lab-ai" {
   application_type    = "Web"
 }
 
+# TODO: Add KeyVault
+resource "azurerm_key_vault" "future-gadget-lab-kv" {
+  name = "future-gadget-lab-kv"
+  location = "${azurerm_resource_group.future-gadget-lab-rg.location}"
+  resource_group_name = "${azurerm_resource_group.future-gadget-lab-rg.name}"
+  enabled_for_disk_encryption = true
+  tenant_id = "${var.ad-tenant-id}"
+  sku_name = "standard"
+
+  # access_policy {
+  #   tenant_id = ""
+  #   object_id = ""
+
+  #   secret_permissions = [
+  #     "get",
+  #   ]
+
+  #   storage_permissions = [
+  #     "get",
+  #   ]
+  # }
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+  }
+}
+
 resource "azurerm_app_service" "future-gadget-lab-wa" {
   name = "future-gadget-lab-wa"
   location            = "${azurerm_resource_group.future-gadget-lab-rg.location}"
@@ -63,4 +91,3 @@ resource "azurerm_app_service" "future-gadget-lab-wa" {
 
 # TODO:: Configure Alerts
 
-# TODO: Add KeyVault
