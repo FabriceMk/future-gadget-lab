@@ -72,9 +72,13 @@ namespace FutureGadgetLab.Web
         /// <param name="env">The hosting environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Some middlewares need to be registered before UseRouting()
             app.UseStaticFiles();
+
             app.UseRouting();
             app.UseCors();
+
+            // Some middlewares need to be registered after UseRouting() and UseCors()
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
 

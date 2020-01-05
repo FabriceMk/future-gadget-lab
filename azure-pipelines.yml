@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,18 +13,36 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Restore packages
-  inputs:
-    command: restore
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: Run Tests
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration)'
+  - task: UseDotNet@2
+    displayName: ".NET SDK 3.1.x"
+    inputs:
+      version: '3.1.x'
+      packageType: sdk
 
+  - task: DotNetCoreCLI@2
+    displayName: "Build"
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration $(buildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: "Run Tests"
+    inputs:
+      command: 'test'
+      projects: '**/*.Tests/*.csproj'
+      arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+  - task: DotNetCoreCLI@2
+    displayName: "Publish"
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Upload Artifacts"
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'futureGadgetLab'
