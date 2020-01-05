@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Custom Rulset" Description="Custom Rulset for my .NET projects" ToolsVersion="14.0">
+<RuleSet Name="Custom Rulset" Description="Custom Ruleset for my .NET projects" ToolsVersion="14.0">
     <Rules AnalyzerId="AsyncUsageAnalyzers" RuleNamespace="AsyncUsageAnalyzers">
         <Rule Id="UseConfigureAwait" Action="Warning" />
     </Rules>
