@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace FutureGadgetLab.Web
 {
@@ -15,32 +15,32 @@ namespace FutureGadgetLab.Web
         /// <param name="args">Application arguments.</param>
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         /// <summary>
-        /// Creates the host for the web application.
+        /// Creates the host for the application.
         /// </summary>
         /// <param name="args">Application arguments.</param>
-        /// <returns>A web host.</returns>
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        /// <returns>A Host builder.</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var hostBuilder = WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .ConfigureKestrel((context, options) =>
+            var hostBuilder = Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    // Set properties and call methods on options
+                    webBuilder.UseStartup<Startup>()
+                    .ConfigureKestrel((context, options) =>
+                        {
+                            // Set properties and call methods on options
+                        });
+
+                    // Enable Azure Appservices Integration for logging only when deployed on Azure
+                    var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
+                    if (regionName != null)
+                    {
+                        webBuilder.UseAzureAppServices();
+                    }
                 });
-
-            // Enable Azure Appservices Integration for logging only when deployed on Azure
-            var regionName = Environment.GetEnvironmentVariable("REGION_NAME");
-            if (regionName != null)
-            {
-                hostBuilder.UseAzureAppServices();
-            }
-
-            // Enable Azure Application Insights
-            hostBuilder.UseApplicationInsights();
 
             return hostBuilder;
         }

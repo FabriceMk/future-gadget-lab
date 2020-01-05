@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace FutureGadgetLab.Web
 {
@@ -50,7 +50,7 @@ namespace FutureGadgetLab.Web
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Future Gadget Lab", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Future Gadget Lab", Version = "v1" });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
@@ -60,6 +60,9 @@ namespace FutureGadgetLab.Web
 
             // Add Health Check service
             services.AddHealthChecks();
+
+            // Add Azure Application Insights integration
+            services.AddApplicationInsightsTelemetry();
         }
 
         /// <summary>
@@ -67,13 +70,13 @@ namespace FutureGadgetLab.Web
         /// </summary>
         /// <param name="app">The web application.</param>
         /// <param name="env">The hosting environment.</param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Enable static files serving.
             app.UseStaticFiles();
-
-            // Register Health Check endpoint.
-            app.UseHealthChecks("/health");
+            app.UseRouting();
+            app.UseCors();
+            app.UseCookiePolicy();
+            app.UseHttpsRedirection();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -94,21 +97,17 @@ namespace FutureGadgetLab.Web
                 app.UseHsts();
             }
 
-            // Forces HTTPS redirection
-            app.UseHttpsRedirection();
-
-            // Set cookie policy with support for GDPR
-            app.UseCookiePolicy();
-
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "areaRoute",
-                    template: "{area:exists}/{controller}/{action}/{id?}");
+                    pattern: "{area:exists}/{controller}/{action}/{id?}");
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHealthChecks("/health");
             });
         }
     }
