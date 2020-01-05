@@ -1,8 +1,3 @@
-# Default AD Tenant ID
-variable "ad-tenant-id" {
-  type = "string"
-}
-
 # Default Azure Region
 variable "region" {
   type = "string"
