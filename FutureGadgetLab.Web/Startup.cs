@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -49,8 +45,7 @@ namespace FutureGadgetLab.Web
             });
 
             // Add framework services.
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -62,6 +57,9 @@ namespace FutureGadgetLab.Web
                 var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // Add Health Check service
+            services.AddHealthChecks();
         }
 
         /// <summary>
@@ -71,8 +69,11 @@ namespace FutureGadgetLab.Web
         /// <param name="env">The hosting environment.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Enable static files serving
+            // Enable static files serving.
             app.UseStaticFiles();
+
+            // Register Health Check endpoint.
+            app.UseHealthChecks("/health");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
