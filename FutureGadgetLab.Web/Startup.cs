@@ -1,11 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 
 namespace FutureGadgetLab.Web
@@ -53,8 +54,8 @@ namespace FutureGadgetLab.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Future Gadget Lab", Version = "v1" });
 
                 // Set the comments path for the Swagger JSON and UI.
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "FutureGadgetLabApi.xml");
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
 

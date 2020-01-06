@@ -40,9 +40,11 @@ steps:
       publishWebProjects: true
       arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
       zipAfterPublish: true
+    condition: ne(variables['Build.Reason'], 'PullRequest')
 
   - task: PublishBuildArtifacts@1
     displayName: "Upload Artifacts"
     inputs:
       pathtoPublish: '$(Build.ArtifactStagingDirectory)'
       artifactName: 'futureGadgetLab'
+    condition: ne(variables['Build.Reason'], 'PullRequest')
