@@ -14,4 +14,4 @@ It's written with [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/),
 * [Visual Studio Code](https://code.visualstudio.com/): An awesome code editor with a good balance between a text editor and an IDE.
 * [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/): CI/CD pipeline.
 * [Microsoft Azure](https://azure.microsoft.com/en-us/): For hosting the live version of the application.
-* [Terraform bu HashiCorp](https://www.terraform.io/): Infrastructure as Code to deploy to the cloud with declaative language and resources state management.
+* [Terraform by HashiCorp](https://www.terraform.io/): Infrastructure as Code to deploy to the cloud with declaative language and resources state management.
