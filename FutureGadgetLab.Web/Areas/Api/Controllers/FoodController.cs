@@ -1,4 +1,4 @@
-using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FutureGadgetLab.Web.Areas.Api.Controllers
@@ -6,9 +6,8 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
     /// <summary>
     /// Controller for Food as a Service (FaaS).
     /// </summary>
-    [Area("api")]
     [Route("api/food")]
-    public class FoodController : Controller
+    public class FoodController : BaseApiController
     {
         /// <summary>
         /// Serves a Sushi. Sushi as a Service (SaaS).
@@ -16,6 +15,7 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         /// <returns>An HTTP result.</returns>
         /// <response code="200">Returns a sushi.</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             var result = "🍣🍣🍣🍣🍣🍣";
@@ -31,6 +31,8 @@ namespace FutureGadgetLab.Web.Areas.Api.Controllers
         /// <response code="200">Returns the ordered food item.</response>
         /// <response code="404">If the food item doesn't exist.</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(string id)
         {
             string result = string.Empty;
