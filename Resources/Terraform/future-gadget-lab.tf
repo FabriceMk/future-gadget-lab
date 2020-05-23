@@ -70,7 +70,7 @@ resource "azurerm_key_vault_access_policy" "webapp-keyvault-access-policy" {
 
 # Put the Storage Connection String to KeyVault
 resource "azurerm_key_vault_secret" "storage-connectionstring" {
-  name         = "futuregadgetlab-connectionstring"
+  name         = "futuregadgetlab-storage-connectionstring"
   value        = "${azurerm_storage_account.futuregadgetlab-storage.primary_connection_string}"
   key_vault_id = "${azurerm_key_vault.future-gadget-lab-kv.id}"
 }
@@ -100,8 +100,6 @@ resource "azurerm_app_service" "future-gadget-lab-wa" {
   }
 
   app_settings = {
-    "WEBSITE_NODE_DEFAULT_VERSION" = "8.9.4",
-
     # Azure App Insights Integration https://docs.microsoft.com/en-us/azure/azure-monitor/app/azure-web-apps?tabs=netcore
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.future-gadget-lab-ai.instrumentation_key}",
     "ApplicationInsightsAgent_EXTENSION_VERSION" = "~2",
