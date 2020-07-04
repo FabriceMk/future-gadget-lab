@@ -46,7 +46,8 @@ namespace FutureGadgetLab.Web
             });
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
