@@ -46,7 +46,8 @@ namespace FutureGadgetLab.Web
             });
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -59,7 +60,7 @@ namespace FutureGadgetLab.Web
                 c.IncludeXmlComments(xmlPath);
             });
 
-            // Add Health Check service
+            // Add health check service
             services.AddHealthChecks();
 
             // Add Azure Application Insights integration
