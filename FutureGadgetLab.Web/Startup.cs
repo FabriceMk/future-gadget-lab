@@ -60,7 +60,7 @@ namespace FutureGadgetLab.Web
                 c.IncludeXmlComments(xmlPath);
             });
 
-            // Add Health Check service
+            // Add health check service
             services.AddHealthChecks();
 
             // Add Azure Application Insights integration
