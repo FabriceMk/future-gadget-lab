@@ -1,16 +1,100 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "dotnet",
-    "isShellCommand": true,
     "args": [],
     "tasks": [
-        {
-            "taskName": "build",
-            "args": [
-                "${workspaceRoot}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj"
-            ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
+      {
+        "label": "build",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "publish",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "publish",
+          "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "watch",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "watch",
+          "run",
+          "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "type": "docker-build",
+        "label": "docker-build: debug",
+        "dependsOn": [
+          "build"
+        ],
+        "dockerBuild": {
+          "tag": "futuregadgetlab:dev",
+          "target": "base",
+          "dockerfile": "${workspaceFolder}/FutureGadgetLab.Web/Dockerfile",
+          "context": "${workspaceFolder}",
+          "pull": true
+        },
+        "netCore": {
+          "appProject": "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj"
         }
+      },
+      {
+        "type": "docker-build",
+        "label": "docker-build: release",
+        "dependsOn": [
+          "build"
+        ],
+        "dockerBuild": {
+          "tag": "futuregadgetlab:latest",
+          "dockerfile": "${workspaceFolder}/FutureGadgetLab.Web/Dockerfile",
+          "context": "${workspaceFolder}",
+          "pull": true
+        },
+        "netCore": {
+          "appProject": "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj"
+        }
+      },
+      {
+        "type": "docker-run",
+        "label": "docker-run: debug",
+        "dependsOn": [
+          "docker-build: debug"
+        ],
+        "dockerRun": {},
+        "netCore": {
+          "appProject": "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj",
+          "enableDebugging": true
+        }
+      },
+      {
+        "type": "docker-run",
+        "label": "docker-run: release",
+        "dependsOn": [
+          "docker-build: release"
+        ],
+        "dockerRun": {},
+        "netCore": {
+          "appProject": "${workspaceFolder}/FutureGadgetLab.Web/FutureGadgetLab.Web.csproj"
+        }
+      }
     ]
 }
