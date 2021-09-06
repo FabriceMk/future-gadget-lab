@@ -29,10 +29,20 @@ resource "azurerm_storage_account" "futuregadgetlab-storage" {
   account_replication_type = "LRS"
 }
 
+# Log Analytics is needed for the new Workpspace mode of AppInsights
+  resource "azurerm_log_analytics_workspace" "future-gadget-lab-log" {
+  name                = "future-gadget-lab-log"
+  location            = azurerm_resource_group.future-gadget-lab-rg.location
+  resource_group_name = azurerm_resource_group.future-gadget-lab-rg.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
 resource "azurerm_application_insights" "future-gadget-lab-ai" {
   name                = "future-gadget-lab-ai"
   location            = azurerm_resource_group.future-gadget-lab-rg.location
   resource_group_name = azurerm_resource_group.future-gadget-lab-rg.name
+  workspace_id        = azurerm_log_analytics_workspace.future-gadget-lab-log.id
   application_type    = "web"
 }
 
